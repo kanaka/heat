@@ -302,7 +302,7 @@ class DockerContainer(resource.Resource):
             return
         client = self.get_client()
         try:
-            client.kill(self.resource_id)
+            client.remove_container(self.resource_id, force=True)
         except docker.errors.APIError as ex:
             if ex.response.status_code != 404:
                 raise
